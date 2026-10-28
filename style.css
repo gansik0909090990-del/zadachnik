@@ -54,6 +54,17 @@ button {
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .error { margin: 4px 0 0; color: var(--danger); font-size: 0.95rem; }
 
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.filter {
+  padding: 7px 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+  font-weight: 400;
+}
+.filter:hover { color: var(--ink); }
+.filter.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); font-weight: 600; }
+
 .list { list-style: none; margin: 16px 0 0; padding: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
 .list:empty { display: none; }
 .item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }

@@ -21,6 +21,12 @@
 
     <p id="error" class="error" role="alert" hidden></p>
 
+    <nav class="filters" aria-label="Фильтр задач">
+      <button type="button" class="filter active" data-filter="all" aria-pressed="true">Все</button>
+      <button type="button" class="filter" data-filter="active" aria-pressed="false">Активные</button>
+      <button type="button" class="filter" data-filter="done" aria-pressed="false">Выполненные</button>
+    </nav>
+
     <ul id="task-list" class="list"></ul>
     <p id="empty" class="empty" hidden>Список пуст. Введите первую задачу выше.</p>
 

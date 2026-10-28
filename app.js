@@ -1,6 +1,7 @@
 "use strict";
 
 const STORAGE_KEY = "zadachnik.tasks.v1";
+const FILTER_KEY = "zadachnik.filter.v1";
 
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
@@ -9,8 +10,10 @@ const emptyEl = document.getElementById("empty");
 const counterEl = document.getElementById("counter");
 const errorEl = document.getElementById("error");
 const clearBtn = document.getElementById("clear-done");
+const filterButtons = document.querySelectorAll("[data-filter]");
 
 let tasks = load();
+let currentFilter = loadFilter();
 
 function load() {
   try {
@@ -29,6 +32,23 @@ function save() {
   }
 }
 
+function loadFilter() {
+  try {
+    const filter = localStorage.getItem(FILTER_KEY);
+    return ["all", "active", "done"].includes(filter) ? filter : "all";
+  } catch {
+    return "all";
+  }
+}
+
+function saveFilter() {
+  try {
+    localStorage.setItem(FILTER_KEY, currentFilter);
+  } catch {
+    showError("Не удалось сохранить выбранный фильтр.");
+  }
+}
+
 function showError(text) {
   errorEl.textContent = text;
   errorEl.hidden = !text;
@@ -36,7 +56,13 @@ function showError(text) {
 
 function render() {
   listEl.replaceChildren();
-  for (const task of tasks) {
+  const visibleTasks = tasks.filter(task => {
+    if (currentFilter === "active") return !task.done;
+    if (currentFilter === "done") return task.done;
+    return true;
+  });
+
+  for (const task of visibleTasks) {
     const li = document.createElement("li");
     li.className = "item" + (task.done ? " done" : "");
 
@@ -63,8 +89,17 @@ function render() {
 
   const left = tasks.filter(t => !t.done).length;
   counterEl.textContent = tasks.length ? `Осталось: ${left} из ${tasks.length}` : "";
-  emptyEl.hidden = tasks.length > 0;
+  emptyEl.textContent = tasks.length
+    ? "В этом разделе задач пока нет."
+    : "Список пуст. Введите первую задачу выше.";
+  emptyEl.hidden = visibleTasks.length > 0;
   clearBtn.hidden = !tasks.some(t => t.done);
+
+  for (const button of filterButtons) {
+    const selected = button.dataset.filter === currentFilter;
+    button.classList.toggle("active", selected);
+    button.setAttribute("aria-pressed", selected.toString());
+  }
 }
 
 function add(text) {
@@ -94,5 +129,13 @@ clearBtn.addEventListener("click", () => {
   tasks = tasks.filter(t => !t.done);
   save(); render();
 });
+
+for (const button of filterButtons) {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+    saveFilter();
+    render();
+  });
+}
 
 render();
