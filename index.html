@@ -3,42 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Задачник</title>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f3f8">
+  <title>Задачник — место для главного</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app">
-    <header class="head">
-      <h1>Мой задачник с поиском</h1>
-      <p id="counter" class="counter" aria-live="polite"></p>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="Задачник — главная"><span class="brand-icon" aria-hidden="true">✓</span>задачник<span class="brand-dot">.</span></a>
+      <span class="local-status"><span aria-hidden="true"></span>Сохраняется на устройстве</span>
     </header>
-
-    <form id="task-form" class="add" autocomplete="off">
-      <label class="visually-hidden" for="task-input">Новая задача</label>
-      <input id="task-input" type="text" maxlength="120" placeholder="Что нужно сделать?" required>
-      <button type="submit">Добавить</button>
-    </form>
-
-    <p id="error" class="error" role="alert" hidden></p>
-
-    <div class="search">
-      <label for="search-input">Поиск задач</label>
-      <input id="search-input" type="search" placeholder="Найти по названию" autocomplete="off" aria-controls="task-list">
+    <div class="workspace">
+      <aside class="intro" aria-labelledby="intro-title">
+        <span class="eyebrow">ЛИЧНОЕ ПРОСТРАНСТВО</span>
+        <h2 id="intro-title">Меньше шума.<br>Больше<br><em>сделанного.</em></h2>
+        <p class="intro-copy">Соберите мысли в одном месте.<br>И двигайтесь в своём ритме.</p>
+        <div class="focus-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
+          <div class="art-card art-card-back"><span></span><span></span></div>
+          <div class="art-card art-card-front"><b>✓</b><span></span><span></span></div><span class="art-spark">✦</span>
+        </div>
+        <div class="intro-note">Одна задача за раз —<br>уже хороший план.</div>
+      </aside>
+      <main class="app">
+        <header class="head">
+          <div><span class="eyebrow">ВАШ РИТМ. ВАШ ПЛАН.</span><h1>Мои задачи<span>.</span></h1></div>
+          <p id="counter" class="counter" aria-live="polite"></p>
+        </header>
+        <p class="subtitle">Освободите голову. Всё важное останется здесь.</p>
+        <form id="task-form" class="add" autocomplete="off">
+          <span class="input-plus" aria-hidden="true">+</span>
+          <label class="visually-hidden" for="task-input">Новая задача</label>
+          <input id="task-input" type="text" maxlength="120" placeholder="Что хочется сделать?" required>
+          <button type="submit" class="add-button">Добавить <span aria-hidden="true">↗</span></button>
+        </form>
+        <p id="error" class="error" role="alert" hidden></p>
+        <div class="toolbar">
+          <nav class="filters" aria-label="Фильтр задач">
+            <button type="button" class="filter active" data-filter="all" aria-pressed="true">Все</button>
+            <button type="button" class="filter" data-filter="active" aria-pressed="false">Активные</button>
+            <button type="button" class="filter" data-filter="done" aria-pressed="false">Выполненные</button>
+          </nav>
+          <div class="search">
+            <label class="visually-hidden" for="search-input">Поиск задач</label>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+            <input id="search-input" type="search" placeholder="Поиск задач" autocomplete="off" aria-controls="task-list">
+          </div>
+        </div>
+        <div class="task-area">
+          <ul id="task-list" class="list" aria-label="Задачи"></ul>
+          <p id="empty" class="empty" role="status" hidden>Список пуст. Введите первую задачу выше.</p>
+        </div>
+        <footer class="foot">
+          <span class="foot-tip"><span aria-hidden="true">✓</span> Маленькие шаги. Большие перемены.</span>
+          <button id="clear-done" type="button" class="link">Удалить выполненные</button>
+        </footer>
+      </main>
     </div>
-
-    <nav class="filters" aria-label="Фильтр задач">
-      <button type="button" class="filter active" data-filter="all" aria-pressed="true">Все</button>
-      <button type="button" class="filter" data-filter="active" aria-pressed="false">Активные</button>
-      <button type="button" class="filter" data-filter="done" aria-pressed="false">Выполненные</button>
-    </nav>
-
-    <ul id="task-list" class="list"></ul>
-    <p id="empty" class="empty" hidden>Список пуст. Введите первую задачу выше.</p>
-
-    <footer class="foot">
-      <button id="clear-done" type="button" class="link">Удалить выполненные</button>
-    </footer>
-  </main>
+    <footer class="page-footer"><span>Место для главного.</span><span>Без суеты. Без лишнего.</span></footer>
+  </div>
   <script src="task-view.js"></script>
   <script src="app.js"></script>
 </body>
