@@ -5,6 +5,7 @@ const FILTER_KEY = "zadachnik.filter.v1";
 
 const form = document.getElementById("task-form");
 const input = document.getElementById("task-input");
+const searchInput = document.getElementById("search-input");
 const listEl = document.getElementById("task-list");
 const emptyEl = document.getElementById("empty");
 const counterEl = document.getElementById("counter");
@@ -57,6 +58,8 @@ function showError(text) {
 function render() {
   listEl.replaceChildren();
   const visibleTasks = tasks.filter(task => {
+    const query = searchInput.value.trim().toLowerCase();
+    if (!task.text.toLowerCase().includes(query)) return false;
     if (currentFilter === "active") return !task.done;
     if (currentFilter === "done") return task.done;
     return true;
@@ -90,7 +93,7 @@ function render() {
   const left = tasks.filter(t => !t.done).length;
   counterEl.textContent = tasks.length ? `Осталось: ${left} из ${tasks.length}` : "";
   emptyEl.textContent = tasks.length
-    ? "В этом разделе задач пока нет."
+    ? (searchInput.value.trim() ? "По вашему запросу задач не найдено." : "В этом разделе задач пока нет.")
     : "Список пуст. Введите первую задачу выше.";
   emptyEl.hidden = visibleTasks.length > 0;
   clearBtn.hidden = !tasks.some(t => t.done);
@@ -129,6 +132,8 @@ clearBtn.addEventListener("click", () => {
   tasks = tasks.filter(t => !t.done);
   save(); render();
 });
+
+searchInput.addEventListener("input", render);
 
 for (const button of filterButtons) {
   button.addEventListener("click", () => {

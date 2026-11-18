@@ -21,6 +21,11 @@
 
     <p id="error" class="error" role="alert" hidden></p>
 
+    <div class="search">
+      <label for="search-input">Поиск задач</label>
+      <input id="search-input" type="search" placeholder="Найти по названию" autocomplete="off" aria-controls="task-list">
+    </div>
+
     <nav class="filters" aria-label="Фильтр задач">
       <button type="button" class="filter active" data-filter="all" aria-pressed="true">Все</button>
       <button type="button" class="filter" data-filter="active" aria-pressed="false">Активные</button>

@@ -37,7 +37,7 @@ h1 { margin: 0; font-size: 2rem; letter-spacing: -0.02em; }
 .counter { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
 .add { display: flex; gap: 8px; margin: 24px 0 8px; }
-input[type="text"] {
+input[type="text"], input[type="search"] {
   flex: 1; min-width: 0;
   padding: 12px 14px;
   font: inherit; color: inherit;
@@ -53,6 +53,9 @@ button {
 }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .error { margin: 4px 0 0; color: var(--danger); font-size: 0.95rem; }
+.search { display: grid; gap: 6px; margin-top: 20px; }
+.search label { color: var(--muted); font-size: 0.95rem; }
+.search input { width: 100%; }
 
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .filter {
