@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: Original add, toggle, filters, reload, delete, clear and validation
+ok 1 - Original add, toggle, filters, reload, delete, clear and validation
+  ---
+  duration_ms: 38.8562
+  type: 'test'
+  ...
+# Subtest: Search supports Cyrillic, phrases, status filters and preserves stored data
+ok 2 - Search supports Cyrillic, phrases, status filters and preserves stored data
+  ---
+  duration_ms: 4.2677
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 141.8083

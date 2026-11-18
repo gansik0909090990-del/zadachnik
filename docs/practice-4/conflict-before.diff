@@ -1,0 +1,15 @@
+diff --cc index.html
+index e010f30,d4dbcf3..0000000
+--- a/index.html
++++ b/index.html
+@@@ -9,7 -9,7 +9,11 @@@
+  <body>
+    <main class="app">
+      <header class="head">
+++<<<<<<< HEAD
+ +      <h1>Задачник с поиском</h1>
+++=======
++       <h1>Мой задачник</h1>
+++>>>>>>> feature/interface-text
+        <p id="counter" class="counter" aria-live="polite"></p>
+      </header>
