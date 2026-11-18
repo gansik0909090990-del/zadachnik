@@ -57,13 +57,7 @@ function showError(text) {
 
 function render() {
   listEl.replaceChildren();
-  const visibleTasks = tasks.filter(task => {
-    const query = searchInput.value.trim().toLowerCase();
-    if (!task.text.toLowerCase().includes(query)) return false;
-    if (currentFilter === "active") return !task.done;
-    if (currentFilter === "done") return task.done;
-    return true;
-  });
+  const visibleTasks = selectVisibleTasks(tasks, currentFilter, searchInput.value);
 
   for (const task of visibleTasks) {
     const li = document.createElement("li");
